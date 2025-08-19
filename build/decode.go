@@ -108,6 +108,8 @@ const (
 	dtmFormat202 = 202
 	dtmFormat203 = 203
 	dtmFormat204 = 204
+	dtmFormat205 = 205
+	dtmFormat719 = 719
 )
 
 func decodeTime(s string, v reflect.Value) error {
@@ -125,15 +127,19 @@ func decodeTime(s string, v reflect.Value) error {
 	case dtmFormat101:
 		format = "060102"
 	case dtmFormat102:
-		format = "20060102"
+		format = "20060102" //CCYYMMDD
 	case dtmFormat201:
 		format = "0601021504"
 	case dtmFormat202:
 		format = "060102150405"
 	case dtmFormat203:
-		format = "200601021504"
+		format = "200601021504" //CCYYMMDDHHMM
 	case dtmFormat204:
-		format = "20060102150405"
+		format = "20060102150405" //
+	case dtmFormat205:
+		format = "200601021504-0700" //CCYYMMDDHHMMZHHMM
+	case dtmFormat719:
+		format = "200601021504-200601021504" //CCYYMMDDHHMM-CCYYMMDDHHMM
 	}
 
 	t, err := time.Parse(format, s)
