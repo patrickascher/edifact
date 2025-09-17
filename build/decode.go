@@ -142,6 +142,11 @@ func decodeTime(s string, v reflect.Value) error {
 		format = "200601021504-200601021504" //CCYYMMDDHHMM-CCYYMMDDHHMM
 	}
 
+	// delete the ? escaper in the 205 Dateformat
+	if dtmFormat == dtmFormat205 {
+		s = strings.Replace(s, "?", "", -1)
+	}
+
 	t, err := time.Parse(format, s)
 	if err != nil {
 		return err
