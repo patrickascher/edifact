@@ -110,7 +110,9 @@ func (s *segmentScanner) Text() string {
 // IsReleased checks if the character at index is released by
 // a release (escape) character in front of it.
 func IsReleased(data []byte, index int, release byte) bool {
-
+if index<=0||index>len(data){
+	return false
+}
 	released := false
 	for i := index - 1; i >= 0 && data[i] == release; i-- {
 		released = !released
