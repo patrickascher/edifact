@@ -137,7 +137,9 @@ func (node *Node) SegmentGroups() []*Node {
 
 // FindNode find a node with matching segment group path and segment tag.
 func (node *Node) FindNode(path, tag string) *Node {
-
+if node==nil{
+	return nil
+}
 	if node.Tag == tag && node.Path() == path {
 		return node
 	}
