@@ -113,7 +113,7 @@ const (
 )
 
 func decodeTime(s string, v reflect.Value) error {
-
+	
 	dtmFormat := dtmFormat102
 	if s[:3] == "DTM" {
 		s = strings.Trim(s, "'")
@@ -147,6 +147,13 @@ func decodeTime(s string, v reflect.Value) error {
 		s = strings.Replace(s, "?", "", -1)
 	}
 
+	// no time given, zero time
+	if s==""{
+		v.Set(reflect.ValueOf(time.Time{}))
+		return nil
+	}
+
+	// otherwise parse time
 	t, err := time.Parse(format, s)
 	if err != nil {
 		return err
